@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+ <package name="default" extends="struts-default">
+
+	<action name="add" class="addBean" method="add">
+		<result type="redirect">list.action</result>
+		<result name="input">/add.jsp</result>
+	</action>
+
+	<action name="update" class="updateBean" method="update">
+		<result type="redirect">list.action</result>
+		<result name="input">/update.jsp</result>
+		<result name="error">/error.jsp</result>
+	</action>
+	<action name="delete" class="deleteBean" method="delete">
+		<result type="redirect">list.action</result>
+		<result name="input">/add.jsp</result>
+	</action>
+	<action name="edit" class="editBean" method="edit">
+		<result>/update.jsp</result>
+	</action>
+	<action name="list" class="listBean" method="list">
+		<result name="success">/list.jsp</result>
+		<result name="input">/add.jsp</result>
+	</action>
+	<action name="login" class="loginBean" method="login">
+		<result name="success">/add.jsp</result>
+		<result name="input">/login.jsp</result>
+		<result name="error">/error.jsp</result>
+	</action>
+</package>
+</struts>
+

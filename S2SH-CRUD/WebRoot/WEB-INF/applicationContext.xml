@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+     <property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+     <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+     <property name="username" value="root" />
+     <property name="password" value="root" />
+   </bean> 
+   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+     <property name="dataSource" ref="dataSource" />
+     <property name="hibernateProperties">
+      <props>
+       <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+       <prop key="hibernate.show_sql">true</prop>
+      </props>
+     </property>
+     <property name="mappingResources">
+      <list>
+       <value>com/ex/model/Employee.hbm.xml</value>
+      </list>
+     </property>
+   </bean>
+ 
+ <bean id="employeeDao" class="com.ex.dao.impl.EmployeeDaoImpl">
+  <property name="sessionFactory" ref="sessionFactory" />
+ </bean>
+
+ <bean id="employeeManager" class="com.ex.service.impl.EmployeeManagerImpl">
+  <property name="employeeDao" ref="employeeDao" />
+ </bean>
+ 
+ <bean id="addBean" class="com.ex.action.EmployeeAction" scope="prototype">
+  <property name="employeeManager" ref="employeeManager" />
+ </bean>
+
+ <bean id="editBean" class="com.ex.action.EmployeeAction" scope="prototype">
+  <property name="employeeManager" ref="employeeManager" />
+ </bean>
+ 
+ <bean id="updateBean" class="com.ex.action.EmployeeAction" scope="prototype">
+  <property name="employeeManager" ref="employeeManager" />
+ </bean>
+  
+ <bean id="deleteBean" class="com.ex.action.EmployeeAction" scope="prototype">
+  <property name="employeeManager" ref="employeeManager" />
+ </bean>
+ 
+ <bean id="saveOrUpdateBean" class="com.ex.action.EmployeeAction" scope="prototype">
+  <property name="employeeManager" ref="employeeManager" />
+ </bean>
+ 
+ <bean id="listBean" class="com.ex.action.EmployeeAction" scope="prototype"> 
+  <property name="employeeManager" ref="employeeManager" />
+ </bean> 
+
+ <bean id="loginBean" class="com.ex.action.EmployeeAction" scope="prototype">
+  <property name="employeeManager" ref="employeeManager" />
+ </bean>
+
+</beans>
